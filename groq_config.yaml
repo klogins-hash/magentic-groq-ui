@@ -1,0 +1,49 @@
+groq_client: &groq_client
+  provider: OpenAIChatCompletionClient
+  config:
+    model: llama-3.3-70b-versatile
+    api_key: ${GROQ_API_KEY}
+    base_url: https://api.groq.com/openai/v1
+    model_info:
+      vision: false
+      function_calling: true
+      json_output: true
+      family: "llama"
+      structured_output: true
+    max_retries: 5
+
+# Vision-capable model for tasks that need image processing
+groq_vision: &groq_vision
+  provider: OpenAIChatCompletionClient
+  config:
+    model: llama-3.2-11b-vision-preview
+    api_key: ${GROQ_API_KEY}
+    base_url: https://api.groq.com/openai/v1
+    model_info:
+      vision: true
+      function_calling: true
+      json_output: true
+      family: "llama"
+      structured_output: true
+    max_retries: 5
+
+groq_action_guard: &groq_action_guard
+  provider: OpenAIChatCompletionClient
+  config:
+    model: llama-3.1-8b-instant
+    api_key: ${GROQ_API_KEY}
+    base_url: https://api.groq.com/openai/v1
+    model_info:
+      vision: false
+      function_calling: true
+      json_output: true
+      family: "llama"
+      structured_output: true
+    max_retries: 5
+
+orchestrator_client: *groq_client
+coder_client: *groq_client
+web_surfer_client: *groq_vision  # Use vision model for screenshot analysis
+file_surfer_client: *groq_client
+action_guard_client: *groq_action_guard
+plan_learning_client: *groq_client
