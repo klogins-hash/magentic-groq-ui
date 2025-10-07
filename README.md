@@ -1,70 +1,91 @@
 <div align="center">
-<img src="docs/img/magui-readme-logo.svg" alt="Magentic-UI Logo">
+<img src="docs/img/magui-readme-logo.svg" alt="Magentic-Groq-UI Logo">
 
 
-_Automate your web tasks while you stay in control_
+_Automate your web tasks while you stay in control - powered by Groq_
 
-[![image](https://img.shields.io/pypi/v/magentic_ui.svg)](https://pypi.python.org/pypi/magentic_ui)
-[![image](https://img.shields.io/pypi/l/magentic_ui.svg)](https://pypi.python.org/pypi/magentic_ui)
+[![image](https://img.shields.io/pypi/v/magentic_groq_ui.svg)](https://pypi.python.org/pypi/magentic_groq_ui)
+[![image](https://img.shields.io/pypi/l/magentic_groq_ui.svg)](https://pypi.python.org/pypi/magentic_groq_ui)
 ![Python Versions](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
 
 </div>
 
 ---
 
-Magentic-UI is a **research prototype** of a human-centered interface powered by a multi-agent system that can browse and perform actions on the web, generate and execute code, and generate and analyze files.
+Magentic-Groq-UI is a **research prototype** of a human-centered interface powered by a multi-agent system using Groq's lightning-fast inference that can browse and perform actions on the web, generate and execute code, and generate and analyze files.
 
   https://github.com/user-attachments/assets/7975fc26-1a18-4acb-8bf9-321171eeade7
 
 ## 🚀 Quick Start
 
-Here's how you can get started with Magentic-UI:
+Here's how you can get started with Magentic-Groq-UI:
 
 ```bash
 # 1. Setup environment
 python3 -m venv .venv
 source .venv/bin/activate
-pip install magentic-ui --upgrade
+pip install magentic-groq-ui --upgrade
 
 # 2. Set your API key
-export OPENAI_API_KEY="your-api-key-here"
+export GROQ_API_KEY="your-groq-api-key-here"
 
-# 3. Launch Magentic-UI
-magentic-ui --port 8081
+# 3. Launch Magentic-Groq-UI
+magentic-groq-ui --port 8081
 ```
 
-Then open <http://localhost:8081> in your browser to interact with Magentic-UI!
+Then open <http://localhost:8081> in your browser to interact with Magentic-Groq-UI!
 
 > **Prerequisites**: Requires Docker and Python 3.10+. Windows users should use WSL2. See [detailed installation](#️-installation) for more info.
 
 ## ✨ What's New
 
+- **Groq Integration**: Lightning-fast inference powered by Groq's optimized infrastructure
+- **Multiple Groq Models**: Support for Llama 3.3, Llama 3.1, Mixtral, and vision models
 - **File Upload Support**: Upload any file through the UI for analysis or modification
 - **MCP Agents**: Extend capabilities with your favorite MCP servers
 - **Easier Installation**: We have uploaded our docker containers to GHCR so you no longer need to build any containers! Installation time now is much quicker.
+
+## 🚀 Quick Groq Setup
+
+For the fastest setup experience, use our setup script:
+
+```bash
+git clone https://github.com/microsoft/magentic-groq-ui.git
+cd magentic-groq-ui
+./setup_groq.sh
+```
+
+This script will:
+- Create a virtual environment
+- Install dependencies
+- Guide you through API key setup
+- Provide usage instructions
 
 ## Alternative Usage Options
 
 **Without Docker** (limited functionality: no code execution):
 ```bash
-magentic-ui --run-without-docker --port 8081
+magentic-groq-ui --run-without-docker --port 8081
 ```
 
 **Command Line Interface**:
 ```bash
-magentic-cli --work-dir PATH/TO/STORE/DATA
+magentic-groq-cli --work-dir PATH/TO/STORE/DATA
 ```
 
 **Custom LLM Clients**:
 ```bash
+# Groq (default)
+pip install magentic-groq-ui[groq]
+
 # Azure
-pip install magentic-ui[azure]
+pip install magentic-groq-ui[azure]
 
 # Ollama (local models)
-pip install magentic-ui[ollama]
+pip install magentic-groq-ui[ollama]
 ```
 
-You can then pass a config file to the `magentic-ui` command (<a href="#model-client-configuration"> client config</a>) or change the model client inside the UI settings.
+You can then pass a config file to the `magentic-groq-ui` command (<a href="#model-client-configuration"> client config</a>) or change the model client inside the UI settings.
 
 For further details on installation please read the   <a href="#️-installation">🛠️ Installation</a> section. For common installation issues and their solutions, please refer to the [troubleshooting document](TROUBLESHOOTING.md). See advanced usage instructions with the command `magentic-ui --help`. 
 
@@ -102,7 +123,7 @@ The example below shows a step by step user interaction with Magentic-UI:
 </p>
 
 
-What differentiates Magentic-UI from other browser use offerings is its transparent and controllable interface that allows for efficient human-in-the-loop involvement. Magentic-UI is built using [AutoGen](https://github.com/microsoft/autogen) and provides a platform to study human-agent interaction and experiment with web agents. Key features include:
+What differentiates Magentic-Groq-UI from other browser use offerings is its transparent and controllable interface that allows for efficient human-in-the-loop involvement, powered by Groq's ultra-fast inference. Magentic-Groq-UI is built using [AutoGen](https://github.com/microsoft/autogen) and provides a platform to study human-agent interaction and experiment with web agents. Key features include:
 
 - 🧑‍🤝‍🧑 **Co-Planning**: Collaboratively create and approve step-by-step plans using chat and the plan editor.
 - 🤝 **Co-Tasking**: Interrupt and guide the task execution using the web browser directly or through chat. Magentic-UI can also ask for clarifications and help when needed.
@@ -142,7 +163,7 @@ If using Docker Desktop, make sure it is set up to use WSL2:
 
 
 
-2. During the Installation step, you will need to set up your `OPENAI_API_KEY`. To use other models, review the [Model Client Configuration](#model-client-configuration) section below.
+2. During the Installation step, you will need to set up your `GROQ_API_KEY`. To use other models, review the [Model Client Configuration](#model-client-configuration) section below.
 
 3. You need at least [Python 3.10](https://www.python.org/downloads/) installed.
 
@@ -153,32 +174,32 @@ If you are on Windows, we recommend to run Magentic-UI inside [WSL2](https://doc
 
 ### PyPI Installation
 
-Magentic-UI is available on PyPI. We recommend using a virtual environment to avoid conflicts with other packages.
+Magentic-Groq-UI is available on PyPI. We recommend using a virtual environment to avoid conflicts with other packages.
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install magentic-ui
+pip install magentic-groq-ui
 ```
 
-Alternatively, if you use [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for dependency management, you can install Magentic-UI with:
+Alternatively, if you use [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for dependency management, you can install Magentic-Groq-UI with:
 
 ```bash
 uv venv --python=3.12 .venv
 . .venv/bin/activate
-uv pip install magentic-ui
+uv pip install magentic-groq-ui
 ```
 
 
 ### Running Magentic-UI
 
-To run Magentic-UI, make sure that Docker is running, then run the following command:
+To run Magentic-Groq-UI, make sure that Docker is running, then run the following command:
 
 ```bash
-magentic-ui --port 8081
+magentic-groq-ui --port 8081
 ```
 
->**Note**: Running this command for the first time will pull two docker images required for the Magentic-UI agents. If you encounter problems, you can build them directly with the following command:
+>**Note**: Running this command for the first time will pull two docker images required for the Magentic-Groq-UI agents. If you encounter problems, you can build them directly with the following command:
 ```bash
 cd docker
 sh build-all.sh
@@ -193,30 +214,38 @@ Once the server is running, you can access the UI at <http://localhost:8081>.
 
 #### Model Client Configuration
 
-If you want to use a different OpenAI key, or if you want to configure use with Azure OpenAI or Ollama, you can do so inside the UI by navigating to settings (top right icon) and changing model configuration. Another option is to pass a yaml config file when you start Magentic-UI which will override any settings in the UI:
+If you want to use a different Groq key, or if you want to configure use with Azure OpenAI or Ollama, you can do so inside the UI by navigating to settings (top right icon) and changing model configuration. Another option is to pass a yaml config file when you start Magentic-Groq-UI which will override any settings in the UI:
 
 ```bash
-magentic-ui --port 8081 --config config.yaml
+magentic-groq-ui --port 8081 --config config.yaml
 ```
 
 Where the `config.yaml` should look as follows with an AutoGen model client configuration:
 
 ```yaml
-gpt4o_client: &gpt4o_client
+groq_client: &groq_client
     provider: OpenAIChatCompletionClient
     config:
-      model: gpt-4o-2024-08-06
+      model: llama-3.3-70b-versatile
       api_key: null
-      base_url: null
+      base_url: https://api.groq.com/openai/v1
       max_retries: 5
 
-orchestrator_client: *gpt4o_client
-coder_client: *gpt4o_client
-web_surfer_client: *gpt4o_client
-file_surfer_client: *gpt4o_client
-action_guard_client: *gpt4o_client
-plan_learning_client: *gpt4o_client
+orchestrator_client: *groq_client
+coder_client: *groq_client
+web_surfer_client: *groq_client
+file_surfer_client: *groq_client
+action_guard_client: *groq_client
+plan_learning_client: *groq_client
 ```
+
+Available Groq models include:
+- **Reasoning**: `llama-3.3-70b-versatile`, `llama-3.1-70b-versatile`, `llama-3.1-8b-instant`
+- **Function Calling**: `llama-3.3-70b-versatile`, `llama-3.1-70b-versatile`, `llama-3.1-8b-instant`
+- **Vision**: `llama-3.2-11b-vision-preview`, `llama-3.2-90b-vision-preview`
+- **Multilingual**: `llama-3.3-70b-versatile`, `llama-3.1-70b-versatile`
+- **Text to Text**: `llama-3.3-70b-versatile`, `llama-3.1-70b-versatile`, `mixtral-8x7b-32768`
+
 You can change the client for each of the agents using the config file and use AzureOpenAI (`AzureOpenAIChatCompletionClient`), Ollama and other clients.
 
 #### MCP Server Configuration

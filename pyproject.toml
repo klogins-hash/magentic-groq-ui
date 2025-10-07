@@ -3,10 +3,10 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "magentic_ui"
+name = "magentic_groq_ui"
 license = "MIT"
 dynamic = ["version"]
-description = "A research prototype of a human-centered interface powered by a multi-agent system"
+description = "A research prototype of a human-centered interface powered by a multi-agent system using Groq"
 readme = "README.md"
 requires-python = ">=3.10"
 keywords = ["agents", "browser-use", "multi-agent", "ai-assistant", "playwright", "web-automation"]
@@ -28,6 +28,7 @@ dependencies = [
     "autogen-agentchat==0.5.7",
     "autogen-core==0.5.7",
     "autogen-ext[openai,docker,file-surfer,web-surfer,magentic-one,task-centric-memory,mcp]==0.5.7",
+    "groq>=0.4.0",
     "aioconsole",
     "nest_asyncio",
     "docker",
@@ -51,9 +52,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/microsoft/magentic-ui"
-Repository = "https://github.com/microsoft/magentic-ui"
-Issues = "https://github.com/microsoft/magentic-ui/issues"
+Homepage = "https://github.com/microsoft/magentic-groq-ui"
+Repository = "https://github.com/microsoft/magentic-groq-ui"
+Issues = "https://github.com/microsoft/magentic-groq-ui/issues"
 
 [project.optional-dependencies]
 eval = [
@@ -70,10 +71,14 @@ ollama = [
     "autogen-ext[ollama]==0.5.7"
 ]
 
+groq = [
+    "groq>=0.4.0"
+]
+
 [project.scripts]
-magentic = "magentic_ui.backend.cli:run"
-magentic-ui = "magentic_ui.backend.cli:run"
-magentic-cli = "magentic_ui._cli:main"
+magentic-groq = "magentic_groq_ui.backend.cli:run"
+magentic-groq-ui = "magentic_groq_ui.backend.cli:run"
+magentic-groq-cli = "magentic_groq_ui._cli:main"
 
 [tool.uv]
 dev-dependencies = [
@@ -128,11 +133,11 @@ warn_unused_ignores = false
 disallow_incomplete_defs = true
 disallow_untyped_decorators = true
 disallow_any_unimported = true
-exclude = ["src/magentic_ui/eval"]
+exclude = ["src/magentic_groq_ui/eval"]
 
 [tool.pyright]
 include = ["src", "tests", "samples"]
-exclude = ["src/magentic_ui/eval/benchmarks/assistantbench/evaluate_utils", "src/magentic_ui/agents/web_surfer/_cua_web_surfer.py", "src/magentic_ui/backend/web/routes"]
+exclude = ["src/magentic_groq_ui/eval/benchmarks/assistantbench/evaluate_utils", "src/magentic_groq_ui/agents/web_surfer/_cua_web_surfer.py", "src/magentic_groq_ui/backend/web/routes"]
 typeCheckingMode = "strict"
 reportUnnecessaryIsInstance = false
 reportMissingTypeStubs = false
@@ -140,22 +145,22 @@ reportMissingTypeStubs = false
 
 [tool.hatch.build.targets.wheel]
 include-package-data = true
-packages = ["src/magentic_ui"]
+packages = ["src/magentic_groq_ui"]
 
 [tool.hatch.version]
-path = "src/magentic_ui/version.py"
+path = "src/magentic_groq_ui/version.py"
 
 [tool.hatch.build]
 include = [
-  "src/magentic_ui/**/*.py",
-  "src/magentic_ui/**/*.yaml",
-  "src/magentic_ui/**/*.json",
-  "src/magentic_ui/**/*.js",
-  "src/magentic_ui/backend/web/ui/**/*", 
-  "src/magentic_ui/docker/**/*",
+  "src/magentic_groq_ui/**/*.py",
+  "src/magentic_groq_ui/**/*.yaml",
+  "src/magentic_groq_ui/**/*.json",
+  "src/magentic_groq_ui/**/*.js",
+  "src/magentic_groq_ui/backend/web/ui/**/*", 
+  "src/magentic_groq_ui/docker/**/*",
 ]
 exclude = [
-  "src/magentic_ui/tests/**",
+  "src/magentic_groq_ui/tests/**",
   "**/__pycache__",
   "**/.*.swp",
 ]

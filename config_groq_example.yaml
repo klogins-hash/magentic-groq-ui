@@ -1,0 +1,80 @@
+# Example Groq Configuration for Magentic-Groq-UI
+# This configuration uses Groq's lightning-fast inference for all agents
+
+# Main Groq client configuration
+groq_client: &groq_client
+  provider: OpenAIChatCompletionClient
+  config:
+    model: llama-3.3-70b-versatile  # Best overall model for reasoning and function calling
+    api_key: null  # Will use GROQ_API_KEY environment variable
+    base_url: https://api.groq.com/openai/v1
+    max_retries: 5
+
+# Fast model for action guard (uses smaller, faster model)
+groq_action_guard: &groq_action_guard
+  provider: OpenAIChatCompletionClient
+  config:
+    model: llama-3.1-8b-instant  # Faster model for quick decisions
+    api_key: null  # Will use GROQ_API_KEY environment variable
+    base_url: https://api.groq.com/openai/v1
+    max_retries: 5
+
+# Vision model for tasks requiring image understanding
+groq_vision: &groq_vision
+  provider: OpenAIChatCompletionClient
+  config:
+    model: llama-3.2-11b-vision-preview  # Vision-capable model
+    api_key: null  # Will use GROQ_API_KEY environment variable
+    base_url: https://api.groq.com/openai/v1
+    max_retries: 5
+
+# Agent assignments
+orchestrator_client: *groq_client
+coder_client: *groq_client
+web_surfer_client: *groq_client
+file_surfer_client: *groq_client
+action_guard_client: *groq_action_guard
+plan_learning_client: *groq_client
+
+# Alternative configurations for different use cases:
+# 
+# For maximum speed (use instant models):
+# groq_instant: &groq_instant
+#   provider: OpenAIChatCompletionClient
+#   config:
+#     model: llama-3.1-8b-instant
+#     api_key: null
+#     base_url: https://api.groq.com/openai/v1
+#     max_retries: 5
+#
+# For multilingual tasks:
+# groq_multilingual: &groq_multilingual
+#   provider: OpenAIChatCompletionClient
+#   config:
+#     model: llama-3.3-70b-versatile
+#     api_key: null
+#     base_url: https://api.groq.com/openai/v1
+#     max_retries: 5
+#
+# For text generation tasks:
+# groq_text: &groq_text
+#   provider: OpenAIChatCompletionClient
+#   config:
+#     model: mixtral-8x7b-32768
+#     api_key: null
+#     base_url: https://api.groq.com/openai/v1
+#     max_retries: 5
+
+# MCP Agent configurations (optional)
+# mcp_agent_configs:
+#   - name: example_agent
+#     description: "An example MCP agent"
+#     model_client: *groq_client
+#     system_message: "You are a helpful assistant."
+#     reflect_on_tool_use: false
+#     mcp_servers:
+#       - server_name: ExampleServer
+#         server_params:
+#           type: StdioServerParams
+#           command: example-mcp-server
+#           args: []

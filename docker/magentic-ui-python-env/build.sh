@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE_NAME=magentic-ui-python-env
+IMAGE_NAME=magentic-groq-ui-python-env
 IMAGE_VERSION=0.0.1
 REGISTRY=ghcr.io/microsoft
 

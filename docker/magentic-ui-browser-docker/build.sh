@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE_NAME=magentic-ui-browser
+IMAGE_NAME=magentic-groq-ui-browser
 IMAGE_VERSION=0.0.1
 REGISTRY=ghcr.io/microsoft
 
