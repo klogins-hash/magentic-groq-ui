@@ -7,6 +7,8 @@ _Automate your web tasks while you stay in control - powered by Groq_
 [![image](https://img.shields.io/pypi/v/magentic_groq_ui.svg)](https://pypi.python.org/pypi/magentic_groq_ui)
 [![image](https://img.shields.io/pypi/l/magentic_groq_ui.svg)](https://pypi.python.org/pypi/magentic_groq_ui)
 ![Python Versions](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)
+[![Deploy to Northflank](https://img.shields.io/badge/Deploy-Northflank-blue)](https://app.northflank.com)
+[![Powered by Groq](https://img.shields.io/badge/Powered%20by-Groq-orange)](https://groq.com)
 
 </div>
 

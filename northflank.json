@@ -1,0 +1,135 @@
+{
+  "apiVersion": "v1",
+  "spec": {
+    "kind": "Workflow",
+    "spec": {
+      "type": "deployment",
+      "context": {
+        "projectId": "show-monies",
+        "clusterId": "nf-compute-50"
+      },
+      "spec": {
+        "name": "magentic-groq-ui",
+        "description": "Multi-agent AI system powered by Groq's lightning-fast inference",
+        "billing": {
+          "deploymentPlan": "nf-compute-50"
+        },
+        "deployment": {
+          "instances": 1,
+          "docker": {
+            "configType": "default"
+          },
+          "internal": {
+            "id": "magentic-groq-ui",
+            "branch": "main",
+            "projectType": "dockerfile",
+            "projectId": "show-monies"
+          }
+        },
+        "runtimeEnvironment": {
+          "baseImage": "DOCKER",
+          "dockerfile": {
+            "buildEngine": "kaniko",
+            "dockerFilePath": "/Dockerfile",
+            "dockerWorkDir": "/",
+            "useCache": false
+          }
+        },
+        "runtimeSource": {
+          "type": "git",
+          "git": {
+            "projectUrl": "https://github.com/klogins-hash/magentic-groq-ui",
+            "projectType": "github",
+            "accountLogin": "klogins-hash",
+            "projectName": "magentic-groq-ui",
+            "ref": {
+              "type": "branch",
+              "name": "main"
+            }
+          }
+        },
+        "buildConfiguration": {
+          "pathIgnoreRules": [],
+          "isAllowList": false,
+          "ciIgnoreFlagsEnabled": false,
+          "dockerFilePath": "/Dockerfile",
+          "dockerWorkDir": "/"
+        },
+        "runtimeEnvironmentVariables": [
+          {
+            "name": "PORT",
+            "value": "8081"
+          },
+          {
+            "name": "HOST", 
+            "value": "0.0.0.0"
+          }
+        ],
+        "secretEnvironmentVariables": [
+          {
+            "name": "GROQ_API_KEY",
+            "secretId": "groq-api-key"
+          }
+        ],
+        "ports": [
+          {
+            "name": "web",
+            "internalPort": 8081,
+            "public": true,
+            "protocol": "HTTP",
+            "security": {
+              "policies": [],
+              "credentials": []
+            },
+            "domains": [],
+            "disableNfDomain": false
+          }
+        ],
+        "persistence": [],
+        "networking": {},
+        "observability": {
+          "logs": {
+            "aggregation": "app"
+          },
+          "metrics": {
+            "enabled": true,
+            "path": "/metrics"
+          }
+        },
+        "resources": {
+          "limits": {
+            "memory": "2Gi",
+            "cpu": "1000m"
+          },
+          "requests": {
+            "memory": "1Gi", 
+            "cpu": "500m"
+          }
+        },
+        "scaling": {
+          "horizontalPolicy": {
+            "maxReplicas": 3,
+            "minReplicas": 1,
+            "targetCPUUtilizationPercentage": 70
+          }
+        },
+        "healthChecks": [
+          {
+            "name": "health",
+            "type": "http",
+            "httpGet": {
+              "path": "/api/health",
+              "port": 8081,
+              "scheme": "HTTP"
+            },
+            "initialDelaySeconds": 30,
+            "periodSeconds": 10,
+            "timeoutSeconds": 5,
+            "failureThreshold": 3,
+            "successThreshold": 1
+          }
+        ]
+      }
+    }
+  }
+}
