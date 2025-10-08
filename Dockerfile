@@ -13,12 +13,16 @@ WORKDIR /app
 
 # Copy and install Python dependencies
 COPY pyproject.toml ./
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel
+RUN pip install --no-cache-dir hatchling
+
+# Copy all source code
+COPY . .
+
+# Install the package
 RUN pip install --no-cache-dir -e .
 
-# Copy application source
-COPY src/ ./src/
-
-# Ensure UI directory exists (frontend assets are already in src/)
+# Ensure UI directory exists (frontend assets should be in src/)
 RUN mkdir -p ./src/magentic_groq_ui/backend/web/ui/
 
 # Create non-root user
